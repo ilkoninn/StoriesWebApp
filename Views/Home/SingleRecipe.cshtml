@@ -2,6 +2,12 @@
 @{
     var recipeId = int.Parse(Context.Request.Path.ToString().Split("/").LastOrDefault());
     var recipe = Model.categories.SelectMany(category => category.Recipes).FirstOrDefault(recipe => recipe.Id == recipeId);
+    var categoryId = "";
+    var lastSegment = Context.Request.Path.ToString().Split("/").LastOrDefault();
+    if (int.TryParse(lastSegment, out var parsedId))
+    {
+        categoryId = $"{parsedId}";
+    }
 }
 
 <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_4.jpg');">
@@ -218,7 +224,15 @@
                         @* Category Section *@
                         @foreach (var item in Model.categories)
                         {
-                            <li><a href="#">@item.Name <span>(@item.Recipes.Count())</span></a></li>
+                            if (Url.Action("Recipes", "Home").Split("/").Count() == 3)
+                            {
+                                <li><a href="@(Url.Action("Recipes", "Home") + "/" + item.Id)">@item.Name <span>(@item.Recipes.Count())</span></a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("Recipes", "Home").Replace(categoryId, $"{item.Id}"))">@item.Name <span>(@item.Recipes.Count())</span></a></li>
+
+                            }
                         }
 
 
