@@ -65,7 +65,7 @@
 
 
                     @* Stories Section *@
-                    @for (var i = 0; i < Math.Min(4, randomRecipesWithCategories.Count); i++)
+                    @for (var i = 0; i < Math.Min(4, randomRecipesWithCategories.OrderByDescending(x => x.CreateDate).Count()); i++)
                     {
                         var recipe = randomRecipesWithCategories[i];
                         <div class="col-md-6 ftco-animate">
@@ -101,19 +101,19 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-md-12 heading-section ftco-animate">
-                        <h2 class="mb-4"><span>Stories</span></h2>
+                        <h2 class="mb-4"><span>Recent Stories</span></h2>
                     </div>
                 </div>
                 <div class="row">
 
 
                     @* Stories Section *@
-                    @for (var i = 0; i < Math.Min(6, randomStoriesWithCategories.Count); i++)
+                    @for (var i = 0; i < Math.Min(6, randomStoriesWithCategories.OrderByDescending(x => x.CreateDate).Count()); i++)
                     {
                         var story = randomStoriesWithCategories[i];
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="@(Url.Action("Single","Home") + "/" + story.Id)" class="img-2">
+                                <a href="@(Url.Action("SingleStory","Home") + "/" + story.Id)" class="img-2">
                                     <img src="~/images/@story.ImgUrl" class="img-fluid" alt="Colorlib Template">
                                 </a>
                                 <div class="text pt-3">
@@ -121,9 +121,9 @@
                                         <span class="pr-3">@story.Category.Name</span>
                                         <span class="ml-auto pl-3">@story.CreateDate.ToString("dd/MM/yyyy")</span>
                                     </p>
-                                    <h3><a href="#">@story.ShortTitle</a></h3>
+                                    <h3><a href="@(Url.Action("SingleStory","Home") + "/" + story.Id)">@story.ShortTitle</a></h3>
                                     <p class="mb-0">
-                                        <a href="@(Url.Action("Single","Home") + "/" + story.Id)" class="btn btn-black py-2">
+                                        <a href="@(Url.Action("SingleStory","Home") + "/" + story.Id)" class="btn btn-black py-2">
                                             Read More <span class="icon-arrow_forward ml-4"></span>
                                         </a>
                                     </p>

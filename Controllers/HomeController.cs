@@ -45,7 +45,7 @@ namespace WebAppStories.Controllers
 
             return View(homeVM);
         }
-        public IActionResult SingleRecipe(int Id)
+        public IActionResult SingleRecipe()
         {
             HomeVM homeVM = new HomeVM();
             homeVM.categories = _context.Categories
@@ -54,7 +54,7 @@ namespace WebAppStories.Controllers
 
             return View(homeVM);
         }
-        public IActionResult SingleStory(int Id)
+        public IActionResult SingleStory()
         {
             HomeVM homeVM = new HomeVM();
             homeVM.categories = _context.Categories
